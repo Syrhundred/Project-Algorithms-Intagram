@@ -13,7 +13,7 @@ public class Main {
     static HashMap<Integer, User> allUsers = new HashMap<>();
     static ArrayList<Integer> ids = new ArrayList<>();
     static String[] pic = pic = new String[] {
-            "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
+                    "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
                     "┈┈╰╱╭▅╮╭▅╮╲╯┈┈┈\n" +
                     "╳┈┈▏╰┈▅▅┈╯▕┈┈┈┈\n" +
                     "┈┈┈╲┈╰━━╯┈╱┈┈╳┈\n" +
