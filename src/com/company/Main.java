@@ -188,7 +188,7 @@ public class Main {
             System.out.print("\nPlease, write here ID of the \nPerson you want to subscribe: ");
 
             int choice = in.nextInt();
-            if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice))) {
+            if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
                 user.followings.add(allUsers.get(choice));
                 System.out.println("\nYou followed succesfully !\n");
             } else {
