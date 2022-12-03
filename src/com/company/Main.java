@@ -1,9 +1,7 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +10,7 @@ public class Main {
     static HashMap<String, User> data = new HashMap<>();
     static HashMap<Integer, User> allUsers = new HashMap<>();
     static ArrayList<Integer> ids = new ArrayList<>();
-    static String[] pic = pic = new String[] {
+    static String[] pic = new String[] {
                     "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
                     "┈┈╰╱╭▅╮╭▅╮╲╯┈┈┈\n" +
                     "╳┈┈▏╰┈▅▅┈╯▕┈┈┈┈\n" +
@@ -31,7 +29,7 @@ public class Main {
                     "┈┈┃┃┃┈┃┃┃┃┈┈┈┈\n" +
                     "┈┈┗┻┛┈┗┛┗┛┈┈┈┈",
 
-            "┊┊┊╱▔▔▔▔▔╲┊┊┊┊┊\n" +
+                    "┊┊┊╱▔▔▔▔▔╲┊┊┊┊┊\n" +
                     "┊┊╱┈┈╱▔╲╲╲▏┊┊┊┊\n" +
                     "┊╱┈╭━━╱▔▔▔▔╲━━╮\n" +
                     "┊▏┈┃▔▔▏╭▅╭▅▕▔▔┃\n" +
@@ -39,7 +37,7 @@ public class Main {
                     "┊╲┈┈╲▏╭━━━━╯▕┊┊\n" +
                     "┊╲┈┈╲▂▂▂▂▂▂╱▔╲",
 
-            "┈┈╱▔▔▔▔▔▔▔▔▔▔▔▏\n" +
+                    "┈┈╱▔▔▔▔▔▔▔▔▔▔▔▏\n" +
                     "┈╱╭▏╮╭┻┻╮╭┻┻╮╭▏\n" +
                     "▕╮╰▏╯┃╭╮┃┃╭╮┃╰▏\n" +
                     "▕╯┈▏┈┗┻┻┛┗┻┻┻╮▏\n" +
@@ -48,7 +46,7 @@ public class Main {
                     "▕┈╭▏╭╮┃┗┛┗┛┃┈╰▏\n" +
                     "▕┈╰▏╰╯╰━━━━╯┈┈▏",
 
-            "▕▔╲┊┊┊┊┊┊┊┊┊╱▔▏\n" +
+                    "▕▔╲┊┊┊┊┊┊┊┊┊╱▔▏\n" +
                     "┊╲┈╲╱▔▔▔▔▔╲╱┈╱\n" +
                     "┊┊╲┈╭╮┈┈┈╭╮┈╱┊\n" +
                     "┊┊╱┈╰╯┈▂┈╰╯┈╲┊\n" +
