@@ -7,8 +7,9 @@ public class Posts {
     String comments;
     int likes;
 
-    public Posts(String posts, int likes){
+    public Posts(String posts, int likes, String comments){
         this.posts = posts;
         this.likes = likes;
+        this.comments = comments;
     }
 }
