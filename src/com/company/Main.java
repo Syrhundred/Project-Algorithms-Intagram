@@ -212,7 +212,7 @@ public class Main {
             System.out.println("You don't registered, please do the registration or Log In");
         } else {
             int choice = in.nextInt();
-            Posts post = new Posts(pic[choice - 1], 0, "");
+            Posts post = new Posts(pic[choice - 1], 0, new HashMap<>());
             user.posts.add(post);
         }
     }
@@ -260,30 +260,16 @@ public class Main {
         }
     }
 
-    public static String commenting(){
-        int j = 0;
+    public static void commenting(){
         for (int i = 0; i < user.followings.size(); i++) {
-            for (; j < user.followings.get(i).posts.size(); j++) {
+            for (int j = 0; j < user.followings.get(i).posts.size(); j++) {
                 System.out.println("------------------");
-                System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name);
-                System.out.println("Number of the post: " + j);
-                System.out.println(user.followings.get(i).posts.get(j).posts);
-                System.out.println("Comments: " + user.followings.get(i).posts.get(j).likes);
-                System.out.println("------------------");
+                System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name + " " + user.followings.get(i).lastName);
+                System.out.println(user.followings.get(i).posts.get(j));
+                System.out.println("Comments:");
+                System.out.println(user.followings.get(i).posts.get(j).comments);
             }
         }
-        System.out.print("Write the ID and number of the post or \n100 to EXIT: ");
-        int choiceId = in.nextInt();
-        if (choiceId == 100) {
-            System.out.println("Main menu: \n");
-            return "";
-        }
-        int choicePost = in.nextInt();
-        if (choicePost == 100) {
-            System.out.println("Main menu: \n");
-            return "";
-        }
-        return "";
     }
 
     public static String unsubscribe() {

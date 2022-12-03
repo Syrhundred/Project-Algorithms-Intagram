@@ -1,13 +1,14 @@
 package com.company;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Posts {
     String posts;
-    String comments;
+    HashMap<Posts, String> comments;
     int likes;
 
-    public Posts(String posts, int likes, String comments){
+    public Posts(String posts, int likes, HashMap<Posts, String> comments){
         this.posts = posts;
         this.likes = likes;
         this.comments = comments;
