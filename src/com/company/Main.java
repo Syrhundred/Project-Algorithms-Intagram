@@ -1,9 +1,7 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,8 +10,8 @@ public class Main {
     static HashMap<String, User> data = new HashMap<>();
     static HashMap<Integer, User> allUsers = new HashMap<>();
     static ArrayList<Integer> ids = new ArrayList<>();
-    static String[] pic = pic = new String[] {
-                    "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
+    static String[] pic = new String[] {
+            "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
                     "┈┈╰╱╭▅╮╭▅╮╲╯┈┈┈\n" +
                     "╳┈┈▏╰┈▅▅┈╯▕┈┈┈┈\n" +
                     "┈┈┈╲┈╰━━╯┈╱┈┈╳┈\n" +
@@ -22,7 +20,7 @@ public class Main {
                     "┈┃┊┣▔╲┊┊╱▔┫┊┃┈┈\n" +
                     "┈╰━━━━╲╱━━━━╯┈╳",
 
-                    "╭━━━╮┈┈╱╲┈┈┈╱╲\n" +
+            "╭━━━╮┈┈╱╲┈┈┈╱╲\n" +
                     "┃╭━━╯┈┈▏▔▔▔▔▔▕\n" +
                     "┃╰━━━━━▏╭▆┊╭▆▕\n" +
                     "╰┫╯╯╯╯╯▏╰╯▼╰╯▕\n" +
@@ -122,10 +120,13 @@ public class Main {
                 case "liking posts" -> {
                     likingPosts();
                 }
+
+                case "commenting posts of another user" -> {
+                    commenting();
+                }
+
                 case "blocking users" -> {
-                    for (int i = 0; i < allUsers.size(); i++) {
-                        System.out.println(allUsers.get(ids.get(i)).name);
-                    }
+                    blockingUsers();
                 }
             }
         }
@@ -177,7 +178,7 @@ public class Main {
     }
 
     public static void subscribe() {
-        if(allUsers.size() > 1) {
+        if (allUsers.size() > 1) {
             System.out.println("-------Users-------");
             for (int i = 0; i < allUsers.size(); i++) {
                 if (allUsers.get(ids.get(i)) != user && !user.followings.contains(allUsers.get(ids.get(i)))) {
@@ -188,11 +189,20 @@ public class Main {
             System.out.print("\nPlease, write here ID of the \nPerson you want to subscribe: ");
 
             int choice = in.nextInt();
-            if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
-                user.followings.add(allUsers.get(choice));
-                System.out.println("\nYou followed succesfully !\n");
-            } else {
-                System.out.println("\nYou can't follow to this Person: " + choice + "\n");
+            if (user.blockList.size() != 0) {
+                for (int i = 0; i < user.blockList.size(); i++) {
+                    if (user.blockList.get(i) == choice) {
+                        System.out.println("This user is blocked");
+                    }
+                    else {
+                        if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
+                            user.followings.add(allUsers.get(choice));
+                            System.out.println("\nYou followed succesfully !\n");
+                        } else {
+                            System.out.println("\nYou can't follow to this Person: " + choice + "\n");
+                        }
+                    }
+                }
             }
         } else {
             System.out.println("There aren't users for subscribe");
@@ -209,7 +219,7 @@ public class Main {
             System.out.println("You don't registered, please do the registration or Log In");
         } else {
             int choice = in.nextInt();
-            Posts post = new Posts(pic[choice - 1], 0);
+            Posts post = new Posts(pic[choice - 1], 0, new ArrayList<>());
             user.posts.add(post);
         }
     }
@@ -234,7 +244,7 @@ public class Main {
                 return "";
             }
             int choicePost = in.nextInt();
-            if (choiceId == 100) {
+            if (choicePost == 100) {
                 System.out.println("Main menu: \n");
                 return "";
             }
@@ -254,6 +264,42 @@ public class Main {
         } else {
             System.out.println("You don't have active posts.");
             return "";
+        }
+    }
+
+    public static void commenting(){
+        for (int i = 0; i < user.followings.size(); i++) {
+            for (int j = 0; j < user.followings.get(i).posts.size(); j++) {
+                System.out.println("------------------");
+                System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name + " " + user.followings.get(i).lastName);
+                System.out.println(user.followings.get(i).posts.get(j).posts);
+                System.out.println("Comments:");
+                System.out.println(user.followings.get(i).posts.get(j).getComments());
+            }
+        }
+        int id = in.nextInt();
+        int postNum = in.nextInt();
+
+    }
+    public static void blockingUsers() {
+        System.out.println("-------Users-------");
+        for (int i = 0; i < allUsers.size(); i++) {
+            if (allUsers.get(ids.get(i)) != user) {
+                System.out.println(allUsers.get(ids.get(i)).id + " " + allUsers.get(ids.get(i)).name + " " + allUsers.get(ids.get(i)).lastName);
+            }
+        }
+        System.out.println("--------------------");
+        int choice = in.nextInt();
+        User temp = allUsers.get(choice);
+
+        for (int i = 0; i < allUsers.size(); i++) {
+            if (allUsers.get(ids.get(i)).id == choice) {
+                user.blockList.add(choice);
+                user.followings.remove(temp);
+            }
+        }
+        for (int i = 0; i < user.blockList.size(); i++) {
+            System.out.println(user.blockList.get(i));
         }
     }
 
