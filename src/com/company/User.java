@@ -12,8 +12,7 @@ public class User {
     int id;
     List<User> followings = new ArrayList<>();
     List<Posts> posts = new ArrayList<>();
-    List<User> blockList = new ArrayList<>();
-
+    List<Integer> blockList = new ArrayList<>();
     public User(int id, String name, String lastName, String email, String sex){
         this.id = id;
         this.name = name;
