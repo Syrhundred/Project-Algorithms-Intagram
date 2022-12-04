@@ -1,5 +1,6 @@
 package com.company;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -189,20 +190,14 @@ public class Main {
             System.out.print("\nPlease, write here ID of the \nPerson you want to subscribe: ");
 
             int choice = in.nextInt();
-            if (user.blockList.size() != 0) {
-                for (int i = 0; i < user.blockList.size(); i++) {
-                    if (user.blockList.get(i) == choice) {
-                        System.out.println("This user is blocked");
-                    }
-                    else {
-                        if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
-                            user.followings.add(allUsers.get(choice));
-                            System.out.println("\nYou followed succesfully !\n");
-                        } else {
-                            System.out.println("\nYou can't follow to this Person: " + choice + "\n");
-                        }
-                    }
-                }
+            if (user.blockList.contains(choice)) {
+                System.out.println("You blocked this Person.\n");
+            }
+            else if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
+                user.followings.add(allUsers.get(choice));
+                System.out.println("\nYou followed succesfully !\n");
+            } else {
+                System.out.println("\nYou can't follow to this Person: " + choice + "\n");
             }
         } else {
             System.out.println("There aren't users for subscribe");
@@ -272,13 +267,40 @@ public class Main {
             for (int j = 0; j < user.followings.get(i).posts.size(); j++) {
                 System.out.println("------------------");
                 System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name + " " + user.followings.get(i).lastName);
-                System.out.println(user.followings.get(i).posts.get(j).posts);
-                System.out.println("Comments:");
-                System.out.println(user.followings.get(i).posts.get(j).getComments());
+                System.out.println(user.followings.get(i).posts.get(j).posts + "\n");
+                System.out.println("Num of this Post: " + j);
+                if (user.followings.get(i).posts.get(j).comments.size() == 0) {
+                    System.out.println("This post doesn't have comments.");
+                }
+                else {
+                    System.out.println("Comments:");
+                    System.out.println(user.followings.get(i).posts.get(j).getComments());
+                }
             }
         }
+        System.out.println("Write the ID and number of the post or \n100 to EXIT: ");
         int id = in.nextInt();
         int postNum = in.nextInt();
+
+        if (id == 100 || postNum == 100) {
+            System.out.println("Main menu: \n");
+            return;
+        } else {
+            System.out.println("Write your comment here: ");
+            in.nextLine();
+            String comment = in.nextLine();
+            for (int i = 0; i < user.followings.size(); i++) {
+                if (user.followings.get(i).id == id) {
+                    for (int k = 0; k < user.followings.get(i).posts.size(); k++) {
+                        if (k == postNum) {
+                            user.followings.get(i).posts.get(postNum).addComment(comment);
+                            System.out.println("You commented successfully!");
+                            return;
+                        }
+                    }
+                }
+            }
+        }
 
     }
     public static void blockingUsers() {
@@ -289,6 +311,7 @@ public class Main {
             }
         }
         System.out.println("--------------------");
+        System.out.print("Write here ID of the User: ");
         int choice = in.nextInt();
         User temp = allUsers.get(choice);
 
@@ -297,9 +320,6 @@ public class Main {
                 user.blockList.add(choice);
                 user.followings.remove(temp);
             }
-        }
-        for (int i = 0; i < user.blockList.size(); i++) {
-            System.out.println(user.blockList.get(i));
         }
     }
 
