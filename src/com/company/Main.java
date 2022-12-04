@@ -129,6 +129,10 @@ public class Main {
                 case "blocking users" -> {
                     blockingUsers();
                 }
+
+                case "removing a user from a blocked list" -> {
+                    unblock();
+                }
             }
         }
     }
@@ -191,11 +195,11 @@ public class Main {
 
             int choice = in.nextInt();
             if (user.blockList.contains(choice)) {
-                System.out.println("You blocked this Person.\n");
+                System.out.println("You blocked this Person. Remove from block list to subscribe.\n");
             }
             else if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
                 user.followings.add(allUsers.get(choice));
-                System.out.println("\nYou followed succesfully !\n");
+                System.out.println("\nYou followed successfully !\n");
             } else {
                 System.out.println("\nYou can't follow to this Person: " + choice + "\n");
             }
@@ -306,7 +310,7 @@ public class Main {
     public static void blockingUsers() {
         System.out.println("-------Users-------");
         for (int i = 0; i < allUsers.size(); i++) {
-            if (allUsers.get(ids.get(i)) != user) {
+            if (ids.get(i) != user.id && !user.blockList.contains(ids.get(i))) {
                 System.out.println(allUsers.get(ids.get(i)).id + " " + allUsers.get(ids.get(i)).name + " " + allUsers.get(ids.get(i)).lastName);
             }
         }
@@ -316,10 +320,42 @@ public class Main {
         User temp = allUsers.get(choice);
 
         for (int i = 0; i < allUsers.size(); i++) {
-            if (allUsers.get(ids.get(i)).id == choice) {
-                user.blockList.add(choice);
-                user.followings.remove(temp);
+            if (user.blockList.size() != 0) {
+                if (ids.get(i) == choice && !user.blockList.contains(choice)) {
+                    user.blockList.add(choice);
+                    user.followings.remove(temp);
+                    System.out.println("\nYou blocked successfully.\n");
+                }
+            } else {
+                if (ids.get(i) == choice) {
+                    user.blockList.add(choice);
+                    user.followings.remove(temp);
+                    System.out.println("\nYou blocked successfully.\n");
+                }
             }
+        }
+    }
+
+    public static void unblock(){
+        System.out.println("-------Blocked users-------");
+        for (int i = 0; i < user.blockList.size(); i++) {
+            System.out.println(user.blockList.get(i) + " " + allUsers.get(user.blockList.get(i)).name + " " + allUsers.get(user.blockList.get(i)).lastName);
+        }
+        System.out.println("---------------------------");
+        System.out.print("Write the ID of Person you want to unblock\nor 100 to EXIT: ");
+        int id = in.nextInt();
+        if (id == 100) {
+            System.out.println("\nMain menu:");
+            return;
+        } else {
+            for (int i = 0; i < user.blockList.size(); i++) {
+                if (user.blockList.get(i) == id) {
+                    user.blockList.remove(i);
+                    System.out.println("\nPerson " + allUsers.get(id).name + " " + allUsers.get(id).lastName + " was successfully unblocked !\n");
+                    return;
+                }
+            }
+            System.out.println("Incorrect ID!");
         }
     }
 
