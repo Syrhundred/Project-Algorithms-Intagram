@@ -15,7 +15,7 @@ public class Posts {
     }
 
     public void addComment(String comment){
-        comments.add(comment);
+        comments.add(Main.user.name + Main.user.lastName + ": " + comment);
     }
 
 //    public String toString(){
