@@ -1,7 +1,9 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +12,7 @@ public class Main {
     static HashMap<String, User> data = new HashMap<>();
     static HashMap<Integer, User> allUsers = new HashMap<>();
     static ArrayList<Integer> ids = new ArrayList<>();
-    static String[] pic = new String[] {
+    static String[] pic = pic = new String[] {
                     "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
                     "┈┈╰╱╭▅╮╭▅╮╲╯┈┈┈\n" +
                     "╳┈┈▏╰┈▅▅┈╯▕┈┈┈┈\n" +
@@ -29,7 +31,7 @@ public class Main {
                     "┈┈┃┃┃┈┃┃┃┃┈┈┈┈\n" +
                     "┈┈┗┻┛┈┗┛┗┛┈┈┈┈",
 
-                    "┊┊┊╱▔▔▔▔▔╲┊┊┊┊┊\n" +
+            "┊┊┊╱▔▔▔▔▔╲┊┊┊┊┊\n" +
                     "┊┊╱┈┈╱▔╲╲╲▏┊┊┊┊\n" +
                     "┊╱┈╭━━╱▔▔▔▔╲━━╮\n" +
                     "┊▏┈┃▔▔▏╭▅╭▅▕▔▔┃\n" +
@@ -37,7 +39,7 @@ public class Main {
                     "┊╲┈┈╲▏╭━━━━╯▕┊┊\n" +
                     "┊╲┈┈╲▂▂▂▂▂▂╱▔╲",
 
-                    "┈┈╱▔▔▔▔▔▔▔▔▔▔▔▏\n" +
+            "┈┈╱▔▔▔▔▔▔▔▔▔▔▔▏\n" +
                     "┈╱╭▏╮╭┻┻╮╭┻┻╮╭▏\n" +
                     "▕╮╰▏╯┃╭╮┃┃╭╮┃╰▏\n" +
                     "▕╯┈▏┈┗┻┻┛┗┻┻┻╮▏\n" +
@@ -46,7 +48,7 @@ public class Main {
                     "▕┈╭▏╭╮┃┗┛┗┛┃┈╰▏\n" +
                     "▕┈╰▏╰╯╰━━━━╯┈┈▏",
 
-                    "▕▔╲┊┊┊┊┊┊┊┊┊╱▔▏\n" +
+            "▕▔╲┊┊┊┊┊┊┊┊┊╱▔▏\n" +
                     "┊╲┈╲╱▔▔▔▔▔╲╱┈╱\n" +
                     "┊┊╲┈╭╮┈┈┈╭╮┈╱┊\n" +
                     "┊┊╱┈╰╯┈▂┈╰╯┈╲┊\n" +
@@ -120,11 +122,6 @@ public class Main {
                 case "liking posts" -> {
                     likingPosts();
                 }
-
-                case "commenting posts of another user" -> {
-                    commenting();
-                }
-
                 case "blocking users" -> {
                     for (int i = 0; i < allUsers.size(); i++) {
                         System.out.println(allUsers.get(ids.get(i)).name);
@@ -212,7 +209,7 @@ public class Main {
             System.out.println("You don't registered, please do the registration or Log In");
         } else {
             int choice = in.nextInt();
-            Posts post = new Posts(pic[choice - 1], 0, new HashMap<>());
+            Posts post = new Posts(pic[choice - 1], 0);
             user.posts.add(post);
         }
     }
@@ -237,7 +234,7 @@ public class Main {
                 return "";
             }
             int choicePost = in.nextInt();
-            if (choicePost == 100) {
+            if (choiceId == 100) {
                 System.out.println("Main menu: \n");
                 return "";
             }
@@ -257,18 +254,6 @@ public class Main {
         } else {
             System.out.println("You don't have active posts.");
             return "";
-        }
-    }
-
-    public static void commenting(){
-        for (int i = 0; i < user.followings.size(); i++) {
-            for (int j = 0; j < user.followings.get(i).posts.size(); j++) {
-                System.out.println("------------------");
-                System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name + " " + user.followings.get(i).lastName);
-                System.out.println(user.followings.get(i).posts.get(j));
-                System.out.println("Comments:");
-                System.out.println(user.followings.get(i).posts.get(j).comments);
-            }
         }
     }
 
