@@ -15,23 +15,14 @@ public class Posts {
     }
 
     public void addComment(String comment){
-        comments.add(Main.user.name + Main.user.lastName + ": " + comment);
+        comments.add(Main.user.name + " " + Main.user.lastName + ": " + comment + '\n');
     }
-
-//    public String toString(){
-//        StringBuilder builder = new StringBuilder();
-//
-//        for(String comment : comments) {
-//            builder.append(comment);
-//        }
-//        return builder + "";
-//    }
 
     public String getComments(){
         StringBuilder commentsB = new StringBuilder();
-        for (int i = 0; i < comments.size(); i++) {
-            commentsB.append(comments.get(i));
+        for (String comment : comments) {
+            commentsB.append(comment);
         }
-        return comments.toString();
+        return commentsB.toString();
     }
 }

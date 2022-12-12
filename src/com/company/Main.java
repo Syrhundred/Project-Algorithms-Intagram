@@ -1,6 +1,5 @@
 package com.company;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -11,6 +10,7 @@ public class Main {
     static HashMap<String, User> data = new HashMap<>();
     static HashMap<Integer, User> allUsers = new HashMap<>();
     static ArrayList<Integer> ids = new ArrayList<>();
+    static ArrayList<Posts> allPosts = new ArrayList<>();
     static String[] pic = new String[] {
             "┈┈╭━╱▔▔▔▔╲━╮┈┈┈\n" +
                     "┈┈╰╱╭▅╮╭▅╮╲╯┈┈┈\n" +
@@ -133,6 +133,10 @@ public class Main {
                 case "removing a user from a blocked list" -> {
                     unblock();
                 }
+
+                case "getting k posts with a maximum number of likes" -> {
+
+                }
             }
         }
     }
@@ -214,20 +218,20 @@ public class Main {
             System.out.println((i + 1));
             System.out.println(pic[i]);
         }
-        if (data.isEmpty()){
+        if (data.size() == 0){
             System.out.println("You don't registered, please do the registration or Log In");
         } else {
             int choice = in.nextInt();
             Posts post = new Posts(pic[choice - 1], 0, new ArrayList<>());
             user.posts.add(post);
+            allPosts.add(post);
         }
     }
 
     public static String likingPosts() {
         if (user.followings.size() != 0) {
-            int j = 0;
             for (int i = 0; i < user.followings.size(); i++) {
-                for (; j < user.followings.get(i).posts.size(); j++) {
+                for (int j = 0; j < user.followings.get(i).posts.size(); j++) {
                     System.out.println("------------------");
                     System.out.println(user.followings.get(i).id + " " + user.followings.get(i).name);
                     System.out.println("Number of the post: " + j);
@@ -307,6 +311,7 @@ public class Main {
         }
 
     }
+
     public static void blockingUsers() {
         System.out.println("-------Users-------");
         for (int i = 0; i < allUsers.size(); i++) {
@@ -391,4 +396,5 @@ public class Main {
             return "";
         }
     }
+
 }
