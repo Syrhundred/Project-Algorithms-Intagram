@@ -1,17 +1,14 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Posts {
     String posts;
-    ArrayList<String> comments;
+    SyrrayList<String> comments;
     int likes;
 
-    public Posts(String posts, int likes, ArrayList<String> comments){
+    public Posts(String posts, int likes, SyrrayList<String> comments){
         this.posts = posts;
         this.likes = likes;
-        this.comments = new ArrayList<>();
+        this.comments = new SyrrayList<>();
     }
 
     public void addComment(String comment){
@@ -20,8 +17,8 @@ public class Posts {
 
     public String getComments(){
         StringBuilder commentsB = new StringBuilder();
-        for (String comment : comments) {
-            commentsB.append(comment);
+        for (int i = 0; i < comments.size(); i++) {
+            commentsB.append(comments.get(i));
         }
         return commentsB.toString();
     }

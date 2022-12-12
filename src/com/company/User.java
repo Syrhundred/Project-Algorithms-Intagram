@@ -1,17 +1,14 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
     String name;
     String lastName;
     String email;
     String sex;
     int id;
-    List<User> followings = new ArrayList<>();
-    List<Posts> posts = new ArrayList<>();
-    List<Integer> blockList = new ArrayList<>();
+    SyrrayList<User> followings = new SyrrayList<>();
+    SyrrayList<Posts> posts = new SyrrayList<>();
+    SyrrayList<Integer> blockList = new SyrrayList<>();
     public User(int id, String name, String lastName, String email, String sex){
         this.id = id;
         this.name = name;

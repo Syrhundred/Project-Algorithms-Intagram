@@ -57,8 +57,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        ArrayList<String> menu;
-        ArrayList<String> menu2 = new ArrayList<>();
+        SyrrayList<String> menu;
+        SyrrayList<String> menu2 = new SyrrayList<>();
         menu2.add("Registration");
         menu2.add("Log In");
         menu2.add("unsubscribing from another user");
@@ -91,7 +91,7 @@ public class Main {
                     logging(menu);
                 }
                 case "Log Out" -> {
-                    menu2 = new ArrayList<>();
+                    menu2 = new SyrrayList<>();
                     menu2.add("Registration");
                     menu2.add("Log In");
                     menu2.add("unsubscribing from another user");
@@ -171,7 +171,7 @@ public class Main {
         }
     }
 
-    public static void logging(ArrayList<String> menu) {
+    public static void logging(SyrrayList<String> menu) {
         System.out.print("Please enter your email for checking: ");
         String email = in.next();
         user = data.get(email);
@@ -179,8 +179,8 @@ public class Main {
         if (user == null) {
             System.out.println("Your email is incorrect");
         } else {
-            menu.remove(0);
-            menu.remove(0);
+            menu.removeInd(0);
+            menu.removeInd(0);
             menu.add("Log Out");
             System.out.println("Hi, " + user.name + " !");
         }
@@ -222,7 +222,7 @@ public class Main {
             System.out.println("You don't registered, please do the registration or Log In");
         } else {
             int choice = in.nextInt();
-            Posts post = new Posts(pic[choice - 1], 0, new ArrayList<>());
+            Posts post = new Posts(pic[choice - 1], 0, new SyrrayList<>());
             user.posts.add(post);
             allPosts.add(post);
         }
@@ -328,13 +328,13 @@ public class Main {
             if (user.blockList.size() != 0) {
                 if (ids.get(i) == choice && !user.blockList.contains(choice)) {
                     user.blockList.add(choice);
-                    user.followings.remove(temp);
+                    user.followings.removeElem(temp);
                     System.out.println("\nYou blocked successfully.\n");
                 }
             } else {
                 if (ids.get(i) == choice) {
                     user.blockList.add(choice);
-                    user.followings.remove(temp);
+                    user.followings.removeElem(temp);
                     System.out.println("\nYou blocked successfully.\n");
                 }
             }
@@ -355,7 +355,7 @@ public class Main {
         } else {
             for (int i = 0; i < user.blockList.size(); i++) {
                 if (user.blockList.get(i) == id) {
-                    user.blockList.remove(i);
+                    user.blockList.removeInd(i);
                     System.out.println("\nPerson " + allUsers.get(id).name + " " + allUsers.get(id).lastName + " was successfully unblocked !\n");
                     return;
                 }
@@ -381,7 +381,7 @@ public class Main {
             int tmpSize = user.followings.size();
             for (int i = 0; i < user.followings.size(); i++) {
                 if (user.followings.get(i).id == choice) {
-                    user.followings.remove(user.followings.get(i));
+                    user.followings.removeElem(user.followings.get(i));
                 }
             }
             if (tmpSize == user.followings.size()) {
