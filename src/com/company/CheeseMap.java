@@ -14,11 +14,13 @@ public class CheeseMap<K, V> {
 
         @Override
         public String toString() {
-            return "Entry{" +
-                    "key=" + key +
-                    ", value=" + value +
-                    ", next=" + next +
-                    '}';
+            Entry<K, V> temp = this;
+            StringBuilder sb = new StringBuilder();
+            while (temp != null) {
+                sb.append(temp.key + " -> " + temp.value + ",");
+                temp = temp.next;
+            }
+            return sb.toString();
         }
 
         public K getKey() {
@@ -43,12 +45,12 @@ public class CheeseMap<K, V> {
         table = new Entry[size];
     }
 
-    public void put(K key, V value){
+    public void put(K key, V value) {
         int hash = hashCode() % size;
         Entry<K, V> e = table[hash];
 
         if (e == null) {
-            table[hash] = new Entry<K , V>(key, value);
+            table[hash] = new Entry<K, V>(key, value);
         } else {
             while (e.next != null) {
                 if (e.getKey() == key) {
@@ -66,7 +68,7 @@ public class CheeseMap<K, V> {
         }
     }
 
-    public V get (K key) {
+    public V get(K key) {
         int hash = key.hashCode() % size;
         Entry<K, V> e = table[hash];
 
@@ -82,7 +84,7 @@ public class CheeseMap<K, V> {
         return null;
     }
 
-    public Entry<K, V> remove(K key){
+    public Entry<K, V> remove(K key) {
         int hash = hashCode() % size;
         Entry<K, V> e = table[hash];
 
