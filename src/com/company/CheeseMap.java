@@ -12,6 +12,15 @@ public class CheeseMap<K, V> {
             this.value = value;
         }
 
+        @Override
+        public String toString() {
+            return "Entry{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", next=" + next +
+                    '}';
+        }
+
         public K getKey() {
             return this.key;
         }
@@ -68,6 +77,33 @@ public class CheeseMap<K, V> {
             if (e.getKey() == key) {
                 return e.getValue();
             }
+            e = e.next;
+        }
+        return null;
+    }
+
+    public Entry<K, V> remove(K key){
+        int hash = hashCode() % size;
+        Entry<K, V> e = table[hash];
+
+        if (e == null) {
+            return null;
+        }
+        if (e.getKey() == key) {
+            table[hash] = e.next;
+            e.next = null;
+            return e;
+        }
+        Entry<K, V> prev = e;
+        e = e.next;
+
+        while (e != null) {
+            if (e.getKey() == key) {
+                prev.next = e.next;
+                e.next = null;
+                return e;
+            }
+            prev = e;
             e = e.next;
         }
         return null;
