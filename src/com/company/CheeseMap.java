@@ -60,6 +60,17 @@ public class CheeseMap<K, V> {
     public V get (K key) {
         int hash = key.hashCode() % size;
         Entry<K, V> e = table[hash];
+
+        if (e == null) {
+            return null;
+        }
+        while (e != null) {
+            if (e.getKey() == key) {
+                return e.getValue();
+            }
+            e = e.next;
+        }
+        return null;
     }
 
 }
