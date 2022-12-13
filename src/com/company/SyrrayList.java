@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class SyrrayList<T> {
     private T[] list;
     private int size;
-    private final int default_capacity = 10;
+    private int default_capacity = 10;
 
     public SyrrayList(int capacity) {
         if (capacity <= 0) {
@@ -21,8 +21,15 @@ public class SyrrayList<T> {
 
     public void add(T item) {
         // толған, толмағанына тексеру , толып жатса ауыстырамыз capacity * 2
-
         list[size++] = item;
+        if (size == list.length) {
+            default_capacity *= 2;
+            T[] temp = (T[]) new Object[default_capacity];
+            for (int i = 0; i < list.length; i++) {
+                temp[i] = list[i];
+            }
+            list = temp;
+        }
     }
 
     public void removeInd(int index) {

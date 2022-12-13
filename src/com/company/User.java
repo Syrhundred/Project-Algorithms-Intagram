@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.HashMap;
+
 public class User {
     String name;
     String lastName;
@@ -9,6 +11,7 @@ public class User {
     SyrrayList<User> followings = new SyrrayList<>();
     SyrrayList<Posts> posts = new SyrrayList<>();
     SyrrayList<Integer> blockList = new SyrrayList<>();
+    //HashMap<User, Boolean> status = new HashMap<>();
     public User(int id, String name, String lastName, String email, String sex){
         this.id = id;
         this.name = name;

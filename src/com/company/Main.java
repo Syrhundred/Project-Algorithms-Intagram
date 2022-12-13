@@ -199,7 +199,7 @@ public class Main {
 
             int choice = in.nextInt();
             if (user.blockList.contains(choice)) {
-                System.out.println("You blocked this Person. Remove from block list to subscribe.\n");
+                System.out.println("You blocked this Person. Remove him/her from block list to subscribe.\n");
             }
             else if (allUsers.containsKey(choice) && !user.followings.contains(allUsers.get(choice)) && choice != user.id) {
                 user.followings.add(allUsers.get(choice));
